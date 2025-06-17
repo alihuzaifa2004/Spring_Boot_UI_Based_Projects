@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plagiarism Detection System</title>
+    <style>
+        body { font-family: Arial; background: #121212; color: white; padding: 20px; }
+        h1 { color: #f9d342; }
+        .container { max-width: 800px; margin: auto; }
+        .section { margin-top: 20px; }
+        .highlight { background-color: yellow; color: black; }
+        textarea { width: 100%; height: 150px; margin-top: 10px; }
+        .score-bar { background-color: green; height: 20px; margin-top: 10px; color: white; text-align: center; }
+        .compare-output { background: #2c2c2c; padding: 10px; margin-top: 10px; border-radius: 5px; }
+        mark { background-color: yellow; color: black; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🕵️Plagiarism Detection System</h1>
+
+    <div class="section">
+        <form id="uploadForm">
+            <input type="file" name="file1" required> File 1<br><br>
+            <input type="file" name="file2" required> File 2<br><br>
+            <label>Model:</label>
+            <select name="model">
+                <option value="basic">Basic</option>
+                <option value="tfidf">TF-IDF</option>
+            </select><br><br>
+            <button type="submit">Compare</button>
+        </form>
+    </div>
+
+    <div class="section" id="resultSection" style="display:none;">
+        <h2>Similarity Score:</h2>
+        <div class="score-bar" id="similarityScore">0%</div>
+
+        <h2>Line-by-Line Highlighting:</h2>
+        <div class="compare-output">
+            <h3>Document 1</h3>
+            <div id="doc1Content"></div>
+        </div>
+        <div class="compare-output">
+            <h3>Document 2</h3>
+            <div id="doc2Content"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('uploadForm');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        const response = await fetch('/api/compare/highlight', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        document.getElementById('similarityScore').textContent = result.similarity;
+        document.getElementById('doc1Content').innerHTML = result.highlightedText1;
+        document.getElementById('doc2Content').innerHTML = result.highlightedText2;
+        document.getElementById('resultSection').style.display = 'block';
+    });
+</script>
+</body>
+</html>
