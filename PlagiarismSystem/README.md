@@ -3,6 +3,17 @@
 
 This is a **Spring Boot-based Plagiarism Detection System** project that provides a minimal web-based UI and a backend service to detect text similarity. The system follows the MVC architecture and uses RESTful endpoints to perform its operations.
 
+
+---
+
+## 🧠 Features
+
+- 📄 Accepts **PDF** and **DOCX** files for comparison.
+- 📊 Calculates **plagiarism percentage** between two documents.
+- 🔍 Highlights **plagiarized sections** in the output.
+- 🌐 Simple web interface using **Spring Boot with Thymeleaf**.
+- 💡 Modular structure with controller, service, and utility layers.
+
 ---
 
 ## 📁 Project Structure
@@ -42,16 +53,6 @@ PlagiarismSystem/
 - Users can enter two texts and submit them for similarity checking.
 - The **backend logic** resides in the `service` layer (`PlagiarismService.java`) and is called via the `controller` (`PlagiarismController.java`).
 - The backend returns a plagiarism score or similarity result.
-
----
-
-## ✅ Features
-
-- Lightweight HTML interface served via Spring Boot
-- RESTful API for plagiarism checking
-- Java-based service layer for similarity computation
-- Clean separation of concerns using Controller-Service architecture
-- Easily extendable to use advanced NLP libraries (e.g., cosine similarity, BERT)
 
 ---
 
@@ -99,14 +100,34 @@ PlagiarismSystem/
 
 ---
 
-## 📌 Notes
+## 🧪 How It Works
 
-- You can enhance the plagiarism checking logic in `PlagiarismService.java`.
-- This version works only for plain text comparison. File upload and processing can be added later.
-- Templates folder is currently unused but ready for Thymeleaf integration if needed.
+1. User uploads two documents (PDF or DOCX).
+2. The backend reads and extracts text using Apache POI or PDFBox.
+3. The text is compared using a **string similarity algorithm** (e.g., cosine similarity, Jaccard, Levenshtein, etc.).
+4. The percentage of similarity is calculated.
+5. The highlighted plagiarized text is displayed in the UI.
 
 ---
 
+## 📦 Dependencies
+
+* Spring Boot Web
+* Apache POI (for `.docx`)
+* PDFBox (for `.pdf`)
+* Thymeleaf (UI)
+* Lombok (optional)
+* Any text comparison or NLP library
+
+---
+
+
+## 👨‍🎓 Author
+
+**Ali Huzaifa Nadeem**  
+[GitHub Profile](https://github.com/alihuzaifa2004)
+
+
 ## 📜 License
 
-This project is intended for educational purposes only. Feel free to modify and build upon it.
+This project is for **educational purposes** only.
